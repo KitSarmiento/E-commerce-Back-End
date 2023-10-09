@@ -38,6 +38,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // create a new category
+//create expression is used to create a new category
 router.post("/", async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
@@ -48,13 +49,14 @@ router.post("/", async (req, res) => {
 });
 
 // update a category by its `id` value
+//update expression is used to update a category by its `id` value
 router.put("/:id", async (req, res) => {
   try {
-    const updatedCategory = await Category.update(req.body, {
+    const updateCategory = await Category.update(req.body, {
       where: { id: req.params.id },
     });
 
-    if (!updatedCategory[0]) {
+    if (!updateCategory[0]) {
       res.status(404).json({ message: "Category not found" });
       return;
     }
@@ -65,8 +67,23 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  // delete a category by its `id` value
+// delete a category by its `id` value
+//destroy expression is used to delete a category by its `id` value
+router.delete("/:id", async (req, res) => {
+  try {
+    const deleteCategory = await Category.destroy({
+      where: { id: req.params.id },
+    });
+
+    if (!deleteCategory) {
+      res.status(404).json({ message: "Category not found" });
+      return;
+    }
+
+    res.status(200).json({ message: "Category deleted" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
