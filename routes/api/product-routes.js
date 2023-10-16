@@ -58,9 +58,15 @@ router.post("/", (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      res.status(200).json({ message: "Product created successfully!" });
     })
-    .then((productTagIds) => res.status(200).json(productTagIds))
+    .then((productTagIds) => {
+      // Exclude 'id' field from the response
+      const response = {
+        message: "Product created successfully!",
+      };
+      res.status(200).json(response);
+    })
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
