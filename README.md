@@ -20,7 +20,7 @@ To use this app, users or developers who have cloned the repository should follo
 
 5. Type "exit" to log out of MySQL, then type "npm run seed" to seed the database.
 
-6. Once the seeding process is complete, the app is ready to be used.
+6. Once the seeding process is complete, type "npm start" and  the app is ready to be used.
 
 Check out the Insomnia by Kong walkthrough video that demonstrates and tests the API routes for categories, products, and tags.
 
